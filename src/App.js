@@ -6,6 +6,7 @@ import ReactTypingEffect from 'react-typing-effect';
 function App() {
   return (
     <div className="App">
+      <img  src = "/12333.jpeg" alt="logo" height="55px"/>
       <div className="Top">
              <h3>Saharsa Age: 18+ Covid Vaccine Slot Availability</h3>
             
