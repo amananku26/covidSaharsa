@@ -1,23 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import Saharsa from './components/Saharsa';
+import ReactTypingEffect from 'react-typing-effect';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="Top">
+             <h3>Saharsa Age: 18+ Covid Vaccine Slot Availability</h3>
+            
+             <h4 className="aman">  <a target="_target" href="https://amananku26.github.io/" > <ReactTypingEffect
+             text={["Create By -  Aman Anku"]}
+             /></a></h4>
+     
+      <div><a target="_blank" href="https://www.cowin.gov.in/">For Bookinng Slot</a> <br/></div>
+     <hr/>
+      <div style={{marginTop:"30px"}}></div>
+      </div>
+ 
+     <Saharsa/>
     </div>
   );
 }
