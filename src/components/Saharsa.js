@@ -58,7 +58,8 @@ console.log(selectedCountry)
                 <DatePicker selected={startDate} onChange={date => setStartDate(date)} dateFormat="Pp" autoFocus={true} minDate={moment().toDate()}/>
             </div>
             <br/>
-            Filter By Pincode : 
+            <div className="filter">
+                Filter By Pincode : 
                 <select
             value={selectedCountry}
             onChange={changeCountry}
@@ -68,6 +69,8 @@ console.log(selectedCountry)
               return <option value={x.pincode} style={{textAlign:"left"}} key={i}>{x.block} {x.pincode}</option>;
             })}
           </select>
+            </div>
+          
         <table className="table">
             <thead>
             <tr>
