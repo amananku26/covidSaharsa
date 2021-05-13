@@ -93,7 +93,7 @@
   integrity sha512-CZOv9tGphhDRlVjVkAgm8Nhklm9RzSmWpX2my+t7Ua/KT616pEzXsQCjinzvkRvHWJ9itO4f296efroX23XCMA==
   dependencies:
     "@babel/helper-explode-assignable-expression" "^7.12.13"
-    "@babel/types" "^7.12.13"
+    "@babel/types" "^7.12.12"
 
 "@babel/helper-compilation-targets@^7.12.1", "@babel/helper-compilation-targets@^7.12.17":
   version "7.12.17"
