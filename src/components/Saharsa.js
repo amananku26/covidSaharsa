@@ -1,10 +1,10 @@
-// https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=71&date=09-05-2021
+// https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=73`&date=09-05-2021
 import { Component,useState,useEffect} from 'react';
 import DatePicker from "react-datepicker";
 import "../App.css"
 import moment from 'moment';
 import "react-datepicker/dist/react-datepicker.css";
-
+import Cookies from "js-cookie"
 
 
 function Saharsa() {
@@ -12,7 +12,9 @@ function Saharsa() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
     const [startDate, setStartDate] = useState(new Date());
-    const [selectedCountry , setSelectedCountry]  = useState("all")
+    const cookpin =  Cookies.get('setpincode')
+    const [selectedCountry , setSelectedCountry]  = useState(cookpin === undefined ? "all" : cookpin)
+    Cookies.set('setpincode', selectedCountry);
     var date = new Date(startDate);
     const fDate = date.getDate() + '/' + Number(date.getMonth() + 1) + '/' + date.getFullYear()
 
@@ -35,7 +37,16 @@ function Saharsa() {
    const changeCountry  = (e) => {
     setSelectedCountry(e.target.value)
    }
-console.log(selectedCountry)
+ 
+   
+    const options = data.map((item)=> ({pincode:item.pincode , block: item.block_name})) ;
+    var dataArr = options.map(item=>{
+      return [item.pincode,item]
+    });
+    var maparr = new Map(dataArr); 
+    var result = [...maparr.values()];
+    // var sttt = data.map((item)=> item.sessions.map((unit)=> (unit.min_age_limit === 18 ? true : false)))
+    // console.log(sttt)
     if (loading) {
       return <p>Data is loading...</p>;
     }
@@ -44,13 +55,6 @@ console.log(selectedCountry)
       return <p>There was an error loading your data!</p>;
     }
    
-    const options = data.map((item)=> ({pincode:item.pincode , block: item.block_name})) ;
-    var dataArr = options.map(item=>{
-      return [item.pincode,item]
-    });
-    var maparr = new Map(dataArr); 
-    var result = [...maparr.values()];
-    console.log("122",result)
     return (
         <div className="container">
          Select Date : {fDate}
@@ -70,8 +74,9 @@ console.log(selectedCountry)
             })}
           </select>
             </div>
-          
+           
         <table className="table">
+       
             <thead>
             <tr>
                 {
@@ -89,29 +94,29 @@ console.log(selectedCountry)
                   if(unit.min_age_limit === 18){
                      if(selectedCountry == "all"){
                       return (
-                        <tr style={{marginBottom:"10px"}} key={unitIndex+1}>
-                        <td style={{textAlign:"left",borderBottom:"1px solid brown"}}>{item.name}</td>     
+                        <tr style={{marginBottom:"10px" , backgroundColor:unit.available_capacity === 0 ? "#FF2127" :"#7CFF21",color:unit.available_capacity===0 ? "white" : "black"}} key={unitIndex+1}>
+                        <td className="location" style={{textAlign:"left",borderBottom:"1px solid brown"}}>{item.name}</td>     
                         <td style={{borderBottom:"1px solid brown"}}>{unit.min_age_limit}</td>
-                        <td style={{color:unit.available_capacity === 0 ? "red" : "green",marginLeft:"38px",textAlign:"right",borderBottom:"1px solid brown"}}  >{unit.available_capacity}</td>  
+                        <td style={{marginLeft:"38px",textAlign:"right",borderBottom:"1px solid brown",fontWeight:"bolder"}}  >{unit.available_capacity === 0 ? `कोई स्लॉट नहीं - ${unit.available_capacity }` : unit.available_capacity }</td>  
                         </tr>
                       )
                      }
                      else if(selectedCountry == item.pincode){
                        return(
                         <tr style={{marginBottom:"10px"}} key={unitIndex+1}>
-                        <td style={{textAlign:"left",borderBottom:"1px solid brown"}}>{item.name}</td>     
+                        <td className="location" style={{textAlign:"left",borderBottom:"1px solid brown"}}>{item.name}</td>     
                         <td style={{borderBottom:"1px solid brown"}}>{unit.min_age_limit}</td>
                         <td style={{color:unit.available_capacity === 0 ? "red" : "green",marginLeft:"38px",textAlign:"right",borderBottom:"1px solid brown"}}  >{unit.available_capacity}</td>  
                         </tr>
                        )
                      }
-                  }
+                  } 
               }
         );
         }
         )}
         </tbody>
-            </table>
+            </table>  
             <a target="_blank" href="https://www.cowin.gov.in/">Powered by Cowin</a> <br/>
         </div>
     );

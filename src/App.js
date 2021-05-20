@@ -5,12 +5,22 @@ import ReactTypingEffect from 'react-typing-effect';
 import Feed from './components/Feedback';
 import {Link ,Route} from "react-router-dom"
 import Cards from './components/Help';
+import { bounce } from 'react-animations';
+import Radium, {StyleRoot} from 'radium';
+
+const styles = {
+  bounce: {
+    animation: 'x 1s',
+    animationName: Radium.keyframes(bounce, 'bounce')
+  }
+}
+ 
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" >
       <img  src = "/12333.jpeg" alt="logo" height="55px" width="25%"/>
-      <div className="Top">
+      <div className="Top" style={styles.bounce}>
              <h3> <span style={{fontWeight:"bolder"}}>Saharsa</span>  Age: 18+ Covid Vaccine Slot Availability</h3>
              <Link to="/">
         <button style={{borderRadius:"15px",border:"none",padding:"8px",marginRight:"9px"}}>Home</button>
